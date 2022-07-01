@@ -514,6 +514,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 5330720074479043312, guid: 382786e4b5918564ea7f9388047d09b5, type: 3}
+      propertyPath: crash
+      value: 
+      objectReference: {fileID: 8300000, guid: 9794c60953b1ee24292c3f2e42c6ee8f, type: 3}
+    - target: {fileID: 5330720074479043312, guid: 382786e4b5918564ea7f9388047d09b5, type: 3}
+      propertyPath: finish
+      value: 
+      objectReference: {fileID: 8300000, guid: 80380809a41ebd44aa5c85f73dfa61fe, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 382786e4b5918564ea7f9388047d09b5, type: 3}
 --- !u!1 &1235832175 stripped
