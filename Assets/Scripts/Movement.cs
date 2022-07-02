@@ -6,7 +6,10 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float rocketTrust = 1f;
     [SerializeField] float rotationSpeed = 1f;
-    [SerializeField] AudioClip mainEngine;
+
+    [SerializeField] ParticleSystem mainBooster;
+    [SerializeField] ParticleSystem leftBooster;
+    [SerializeField] ParticleSystem rightBooster;
 
     Rigidbody rB;
     AudioSource aS;
@@ -27,16 +30,11 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space))
         {
-            rB.AddRelativeForce(Vector3.up * rocketTrust * Time.deltaTime);
-            if (!aS.isPlaying)
-            {
-                aS.Play();
-            } 
-            
+            StartThrusting();
         }
         else
         {
-            aS.Stop();
+            StopThrusting();
         }
     }
 
@@ -44,12 +42,59 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotationSpeed);
+            RotateLeft();
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            ApplyRotation(-rotationSpeed);
+            RotateRight();
         }
+        else
+        {
+            RotateStop();
+        }
+    }
+
+    void StartThrusting()
+    {
+        rB.AddRelativeForce(Vector3.up * rocketTrust * Time.deltaTime);
+        if (!mainBooster.isPlaying)
+        {
+            mainBooster.Play();
+        }
+        if (!aS.isPlaying)
+        {
+            aS.Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        mainBooster.Stop();
+        aS.Stop();
+    }
+
+    void RotateLeft()
+    {
+        ApplyRotation(rotationSpeed);
+        if (!rightBooster.isPlaying)
+        {
+            rightBooster.Play();
+        }
+    }
+
+    void RotateRight()
+    {
+        ApplyRotation(-rotationSpeed);
+        if (!leftBooster.isPlaying)
+        {
+            leftBooster.Play();
+        }
+    }
+
+    void RotateStop()
+    {
+        rightBooster.Stop();
+        leftBooster.Stop();
     }
 
     void ApplyRotation(float rotationThisFrame)

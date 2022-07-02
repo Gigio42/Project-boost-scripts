@@ -7,6 +7,9 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip finish;
     [SerializeField] AudioClip crash;
 
+    [SerializeField] ParticleSystem finishFX;
+    [SerializeField] ParticleSystem crashFX;
+
     AudioSource aS;
 
     bool isTransitioning = false;
@@ -49,6 +52,8 @@ public class CollisionHandler : MonoBehaviour
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", 1f);
         aS.PlayOneShot(crash);
+        crashFX.Play();
+        
     }
 
     void StartFinishSequence()
@@ -58,6 +63,7 @@ public class CollisionHandler : MonoBehaviour
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadNextLevel", levelLoadDelay);
         aS.PlayOneShot(finish);
+        finishFX.Play();
     }
 
     void ReloadLevel()
