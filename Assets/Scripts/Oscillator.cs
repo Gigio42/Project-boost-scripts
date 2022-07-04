@@ -16,11 +16,13 @@ public class Oscillator : MonoBehaviour
 
     void Update()
     {
+        if (period <= Mathf.Epsilon) {return;}
+        
         float cycles = Time.time / period;
 
         const float tau = Mathf.PI * 2;
         float rawSine = Mathf.Sin(cycles * tau);
-
+        
         movementFactor = (rawSine + 1f) / 2f;
 
         Vector3 offset = movementVector * movementFactor;
